@@ -1,0 +1,83 @@
+import os, sys, cv2
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# adding and 'r' before the path string, so it converts it to a 'raw string'.
+image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\test1.jpg")
+
+
+#cv2.imshow('image', image)
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
+
+#image.shape
+#image.max()
+#image.min()
+
+#use img., not im.
+
+plt.figure(figsize=(10, 10))
+new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+
+#plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+#plt.imshow(new_image)
+#plt.show()
+cv2.imwrite("Origional_Image.jpg", image)
+
+#type(image)
+#image.shape
+#image.max()
+#image.min()
+
+#   DEFINE PARAMETERS OF IMAGE
+
+    #   width = (insert pixel amount here)
+    #   height = (insert pixel amount here)
+#width = input("insert image width: ")
+#height = input("insert image height: ")
+    #   left_pad = (insert pixel amount here)
+    #   top_pad = (insert pixel amount here)
+#left_pad = input("insert image shift right: ")
+#top_pad = input("insert image shift down: ")
+
+    # [row_min: row_max, cloumn_min: column_max, pic_number_min: pic_number_max]
+plt.subplot(221)
+plt.imshow(new_image[:, :, :])
+plt.title("RGB Image")
+
+Split = image.copy()
+
+Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+
+#right_parameter = int(left_pad) + int(width)
+#bottom_parameter = int(top_pad) + int(height)
+
+#Split_blue, Split_green, Split_red = Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 0], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 1], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 2]
+
+    #plt.subplot(221)
+    #Split_BGR = cv2.vconcat([Split_blue, Split_green, Split_red])
+    #plt.imshow(Split_BGR,cmap='gray')
+    #plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
+
+plt.subplot(222)
+plt.imshow(Split_blue,cmap='gray')
+plt.title("blue color channel")
+cv2.imwrite("Split_blue.jpg", Split_blue)
+
+plt.subplot(223)
+plt.imshow(Split_green,cmap='gray')
+plt.title("green color channel")
+cv2.imwrite("Split_green.jpg", Split_green)
+
+plt.subplot(224)
+plt.imshow(Split_red,cmap='gray')
+plt.title("red color channel")
+cv2.imwrite("Split_red.jpg", Split_red)
+
+plt.show()
+
+
+
+

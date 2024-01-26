@@ -1,0 +1,25 @@
+from PIL import Image
+import matplotlib.pyplot as plt
+import os
+
+
+
+# !wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-CV0101EN-SkillsNetwork/images%20/images_part_1/lenna.png -O lenna.png
+# !wget file:///C:/Users/david/Pictures/Saved%20Pictures/birds-of-north-america.jpg -O birds.jpg
+# !wget file:///C:/Users/david/Pictures/Screenshots/Screenshot%202024-01-07%20191153.png -O sustache.png
+
+
+my_image = "lenna.png"
+
+cwd = os.getcwd()
+cwd 
+
+image_path = os.path.join(cwd, my_image)
+image_path
+
+image = Image.open(my_image)
+type(image)
+
+plt.figure(figsize=(10,10))
+plt.imshow(image)
+plt.show()

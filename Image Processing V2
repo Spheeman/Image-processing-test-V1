@@ -7,6 +7,7 @@ from pathlib import Path
 
 ##  adding and 'r' before the path string, so it converts it to a 'raw string'.
 
+images = Path("/var/www/html/myfolder/images").glob("*.jpg")
 image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\test1.jpg")
 
 #image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\ML Photo-6.jpg")
@@ -62,32 +63,32 @@ Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :,
 #bottom_parameter = int(top_pad) + int(height)
 #Split_blue, Split_green, Split_red = Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 0], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 1], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 2]
 
-plt.subplot(221)
-Split_BGR = cv2.vconcat([Split_blue, Split_green, Split_red])
-plt.imshow(Split_BGR,cmap='gray')
-plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
+    #plt.subplot(221)
+    #Split_BGR = cv2.vconcat([Split_blue, Split_green, Split_red])
+    #plt.imshow(Split_BGR,cmap='gray')
+    #plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
 
 ## SUBPLOT FOR RGB IMAGE
-plt.subplot(221)
-plt.imshow(new_image[:, :, :])
-plt.title("RGB Image")
+    #plt.subplot(221)
+    #plt.imshow(new_image[:, :, :])
+    #plt.title("RGB Image")
 
 ##  SUBPLOT FOR BLUE CHANNEL
-plt.subplot(222)
-plt.imshow(Split_blue,cmap='gray')
-plt.title("blue color channel")
+    #plt.subplot(222)
+    #plt.imshow(Split_blue,cmap='gray')
+    #plt.title("blue color channel")
 cv2.imwrite("Split_blue.jpg", Split_blue)
 
 ##  SUBPLOT FOR GREEN CHANNEL
-plt.subplot(223)
-plt.imshow(Split_green,cmap='gray')
-plt.title("green color channel")
+    #plt.subplot(223)
+    #plt.imshow(Split_green,cmap='gray')
+    #plt.title("green color channel")
 cv2.imwrite("Split_green.jpg", Split_green)
 
 ##  SUBPLOT FOR RED CHANNEL
-plt.subplot(224)
-plt.imshow(Split_red,cmap='gray')
-plt.title("red color channel")
+    #plt.subplot(224)
+    #plt.imshow(Split_red,cmap='gray')
+    #plt.title("red color channel")
 cv2.imwrite("Split_red.jpg", Split_red)
 
 plt.show()

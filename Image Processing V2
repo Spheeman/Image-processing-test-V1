@@ -1,14 +1,34 @@
 import os, sys, cv2
 import matplotlib.pyplot as plt
 import numpy as np
+import  glob
+
 from PIL import Image
 from pathlib import Path
+from os import listdir
+from os.path import isfile, join
 
+from collections import Counter
 
+    ##  DEFINE PATHS
 ##  adding and 'r' before the path string, so it converts it to a 'raw string'.
+path_blue = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_BLUE"
+path_green = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_GREEN"
+path_red = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_RED"
 
-images = Path("/var/www/html/myfolder/images").glob("*.jpg")
-image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\test1.jpg")
+path_test = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images"
+#image = Path("C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images").glob("*.jpg")
+
+
+
+#image = cv2.imread(os.path.join(path_test, "test1.jpg"))
+
+    #image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\test1.jpg")
+    #image = cv2.imread('1.jpg', 1)
+    #   RED BAND FILE PATH
+    #   "C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_RED"
+
+
 
 #image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\ML Photo-6.jpg")
 
@@ -24,8 +44,8 @@ image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\te
 
 #use img., not im.
 
-plt.figure(figsize=(10, 10))
-new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    #plt.figure(figsize=(10, 10))
+#new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
 #plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -42,25 +62,129 @@ new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 ##  DEFINE PARAMETERS OF IMAGE
 
-    #   width = (insert pixel amount here)
-    #   height = (insert pixel amount here)
+    ##  width = (insert pixel amount here)
+    ##  height = (insert pixel amount here)
 #width = input("insert image width: ")
 #height = input("insert image height: ")
-    #   left_pad = (insert pixel amount here)
-    #   top_pad = (insert pixel amount here)
+    ##  left_pad = (insert pixel amount here)
+    ##  top_pad = (insert pixel amount here)
 #left_pad = input("insert image shift right: ")
 #top_pad = input("insert image shift down: ")
 
-    # [row_min: row_max, cloumn_min: column_max, pic_number_min: pic_number_max]
+    ##  [row_min: row_max, cloumn_min: column_max, pic_number_min: pic_number_max]
 
-Split = image.copy()
+    ###     WAS TESTING SOMETHING I FOUND
+'''onlyfiles = [f for f in listdir(path_test) if isfile(join(path_test))]
+image = np.empty(len(onlyfiles), dtype = object)
 
-##  IF NO SET PARAMETERS
-Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+for n in range(0, len(onlyfiles)):
+    image[n] = cv2.imread(join(path_test, onlyfiles[n]))
 
-##  IF SET PARAMETERS
+    Split = image.copy()
+
+    ##  IF NO SET PARAMETERS
+    Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2] 
+
+#for n in range(0, len(onlyfiles)):
+    # other things you need to do snipped
+    #cv2.imwrite(f'/path/to/destination/image_{n}.png',image)
+    cv2.imwrite(f"C:\\Users\\david\Documents\\GitHub\\Image-processing-test-V1\\Images_BLUE\\Split_blue{n}.jpg", Split_blue)
+    cv2.imwrite(f"C:\\Users\\david\Documents\\GitHub\\Image-processing-test-V1\\Images_GREEN\\Split_green{n}.jpg", Split_green)
+    cv2.imwrite(f"C:\\Users\\david\Documents\\GitHub\\Image-processing-test-V1\\Images_RED\\Split_red{n}.jpg", Split_red)
+'''
+
+
+# specify the img directory path
+#path = "path/to/img/folder/"
+
+# list files in img directory
+#files = os.listdir(path_test)
+'''
+for file in files:
+    # make sure file is an image
+    if file.endswith(('.jpg', '.png', '.jpeg')):
+
+        image = cv2.imread(os.path.join(path_test, file))
+
+        Split = image.copy()
+            ##  IF NO SET PARAMETERS
+        Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+
+        cv2.imwrite(os.path.join(path_blue, "Split_blue3.jpg"), Split_blue)
+
+        cv2.imwrite(os.path.join(path_green, "Split_green3.jpg"), Split_green)
+
+        cv2.imwrite(os.path.join(path_red, f"Split_red.jpg"), Split_red)
+        continue
+    continue
+'''
+'''
+for filename in os.listdir(files):
+    if filename.endswith('.jpg'):
+        image = cv2.imread(os.path.join(path_test, filename))
+    r = []
+
+    for index in range(len(r)):
+        Split = image.copy()
+
+        ##  IF NO SET PARAMETERS
+        Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+        
+        #cv2.imwrite(path_blue, "Split_blue2.jpg", Split_blue)
+        cv2.imwrite(os.path.join(path_blue, str(index) + "Split_blue.jpg"), Split_blue[:,:])
+        #cv2.imwrite(path_blue + str(index) + '.jpg', Split_blue[:,:])
+
+        cv2.imwrite(path_green + str(index) + '.jpg', Split_green[:,:])
+
+        cv2.imwrite(path_red + str(index) + '.jpg', Split_red[:,:])
+        continue
+    continue
+'''
+
+    ##  READ IMAGES IN A GIVEN FOLDER
+for images in os.listdir(path_test):
+ 
+    # check if the image ends with png
+    if (images.endswith(".png") or images.endswith(".jpg")\
+        or images.endswith(".jpeg")):
+
+
+        print(images)
+        continue
+    continue
+
+    ## TRACK IMAGES IN ORDER IN A GIVEN FOLDER
+for images in glob.iglob(f'{path_test}/*'):
+   
+    # check if the image ends with png
+    if (images.endswith(".png") or images.endswith(".jpg")\
+        or images.endswith(".jpeg")):
+        print(images)
+        continue
+    continue
+
+        
+
+
+
+#Split = image.copy()
+
+    ##  IF NO SET PARAMETERS
+#Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+
+
+#cv2.imwrite(os.path.join(path_blue, "Split_blue2.jpg"), Split_blue)
+
+#cv2.imwrite(os.path.join(path_green, "Split_green2.jpg"), Split_green)
+
+#cv2.imwrite(os.path.join(path_red, "Split_red2.jpg"), Split_red)
+
+
+
+    ##  IF SET PARAMETERS
 #right_parameter = int(left_pad) + int(width)
 #bottom_parameter = int(top_pad) + int(height)
+
 #Split_blue, Split_green, Split_red = Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 0], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 1], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 2]
 
     #plt.subplot(221)
@@ -68,31 +192,32 @@ Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :,
     #plt.imshow(Split_BGR,cmap='gray')
     #plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
 
-## SUBPLOT FOR RGB IMAGE
-    #plt.subplot(221)
-    #plt.imshow(new_image[:, :, :])
-    #plt.title("RGB Image")
+    ## SUBPLOT FOR RGB IMAGE
+#plt.subplot(221)
+#plt.imshow(new_image[:, :, :])
+#plt.title("RGB Image")
 
-##  SUBPLOT FOR BLUE CHANNEL
-    #plt.subplot(222)
-    #plt.imshow(Split_blue,cmap='gray')
-    #plt.title("blue color channel")
-cv2.imwrite("Split_blue.jpg", Split_blue)
+    ##  SUBPLOT FOR BLUE CHANNEL
+#plt.subplot(222)
+#plt.imshow(Split_blue,cmap='gray')
+#plt.title("blue color channel")
+#cv2.imwrite("Split_blue.jpg", Split_blue)
 
-##  SUBPLOT FOR GREEN CHANNEL
-    #plt.subplot(223)
-    #plt.imshow(Split_green,cmap='gray')
-    #plt.title("green color channel")
-cv2.imwrite("Split_green.jpg", Split_green)
+    ##  SUBPLOT FOR GREEN CHANNEL
+#plt.subplot(223)
+#plt.imshow(Split_green,cmap='gray')
+#plt.title("green color channel")
+#cv2.imwrite("Split_green.jpg", Split_green)
 
-##  SUBPLOT FOR RED CHANNEL
-    #plt.subplot(224)
-    #plt.imshow(Split_red,cmap='gray')
-    #plt.title("red color channel")
-cv2.imwrite("Split_red.jpg", Split_red)
+    ##  SUBPLOT FOR RED CHANNEL
+#plt.subplot(224)
+#plt.imshow(Split_red,cmap='gray')
+#plt.title("red color channel")
+#cv2.imwrite("Split_red.jpg", Split_red)
 
-plt.show()
-
-
+#plt.show()
 
 
+
+
+exit()

@@ -43,29 +43,29 @@ new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     #   width = (insert pixel amount here)
     #   height = (insert pixel amount here)
-width = input("insert image width: ")
-height = input("insert image height: ")
+#width = input("insert image width: ")
+#height = input("insert image height: ")
     #   left_pad = (insert pixel amount here)
     #   top_pad = (insert pixel amount here)
-left_pad = input("insert image shift right: ")
-top_pad = input("insert image shift down: ")
+#left_pad = input("insert image shift right: ")
+#top_pad = input("insert image shift down: ")
 
     # [row_min: row_max, cloumn_min: column_max, pic_number_min: pic_number_max]
 
 Split = image.copy()
 
 ##  IF NO SET PARAMETERS
-#Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
 
-##  IF SET PARAMETERS
-right_parameter = int(left_pad) + int(width)
-bottom_parameter = int(top_pad) + int(height)
-Split_blue, Split_green, Split_red = Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 0], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 1], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 2]
+    ##  IF SET PARAMETERS
+#right_parameter = int(left_pad) + int(width)
+#bottom_parameter = int(top_pad) + int(height)
+#Split_blue, Split_green, Split_red = Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 0], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 1], Split[int(left_pad):int(right_parameter), int(top_pad): int(bottom_parameter), 2]
 
-plt.subplot(221)
-Split_BGR = cv2.vconcat([Split_blue, Split_green, Split_red])
-plt.imshow(Split_BGR,cmap='gray')
-plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
+#plt.subplot(221)
+#Split_BGR = cv2.vconcat([Split_blue, Split_green, Split_red])
+#plt.imshow(Split_BGR,cmap='gray')
+#plt.title("Different color channels  blue (top), green (middle), red (bottom)  ")
 
 ## SUBPLOT FOR RGB IMAGE
 plt.subplot(221)

@@ -1,3 +1,4 @@
+from itertools import count
 import os, sys, cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,11 +13,11 @@ from collections import Counter
 
     ##  DEFINE PATHS
 ##  adding and 'r' before the path string, so it converts it to a 'raw string'.
-path_blue = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_BLUE"
-path_green = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_GREEN"
-path_red = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_RED"
+path_blue = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE"
+path_green = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN"
+path_red = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED"
 
-path_test = r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images"
+path_test = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test images"
 #image = Path("C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images").glob("*.jpg")
 
 
@@ -118,6 +119,7 @@ for file in files:
         continue
     continue
 '''
+
 '''
 for filename in os.listdir(files):
     if filename.endswith('.jpg'):
@@ -141,31 +143,128 @@ for filename in os.listdir(files):
     continue
 '''
 
+'''
+all_images = []
     ##  READ IMAGES IN A GIVEN FOLDER
-for images in os.listdir(path_test):
+for imglist1 in os.listdir(path_test):
  
     # check if the image ends with png
-    if (images.endswith(".png") or images.endswith(".jpg")\
-        or images.endswith(".jpeg")):
-
-
-        print(images)
+    if (imglist1.endswith(".png") or imglist1.endswith(".jpg")\
+        or imglist1.endswith(".jpeg")):
+        print(imglist1)
+        all_images.append(imglist1)
+        print(all_images)
         continue
     continue
+
+print("-----------")
+
+'''
 
     ## TRACK IMAGES IN ORDER IN A GIVEN FOLDER
-for images in glob.iglob(f'{path_test}/*'):
+
+all_images = []
+for imglist2 in glob.iglob(f'{path_test}/*'):
    
     # check if the image ends with png
-    if (images.endswith(".png") or images.endswith(".jpg")\
-        or images.endswith(".jpeg")):
-        print(images)
+    if (imglist2.endswith(".png") or imglist2.endswith(".jpg")\
+        or imglist2.endswith(".jpeg")):
+        print(imglist2)
+        all_images.append(imglist2)
+        print(all_images)
+
         continue
     continue
 
+
+plt.figure(figsize=(10, 10))
+
+for i in range(0, len(all_images)):
+
+    new_image = cv2.imread(all_images[i])
+    #cv2.imshow(f'image{i}', new_image)
+
+    image = cv2.cvtColor(new_image, cv2.COLOR_BGR2RGB)
+
+    #plt.figure(figsize=(10, 10))
+    #new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    Split = image.copy()
+    Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
+
+        ## SUBPLOT FOR RGB IMAGE
+    plt.subplot(221)
+    plt.imshow(image[:, :, :])
+    plt.title("RGB Image")
+
+    ##  SUBPLOT FOR BLUE CHANNEL
+    plt.subplot(222)
+    plt.imshow(Split_blue,cmap='gray')
+    plt.title("blue color channel")
+    #cv2.imwrite("Split_blue.jpg", Split_blue)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/Split_blue_{i}.jpg", Split_blue)
+
+    ##  SUBPLOT FOR GREEN CHANNEL
+    plt.subplot(223)
+    plt.imshow(Split_green,cmap='gray')
+    plt.title("green color channel")
+    #cv2.imwrite("Split_green.jpg", Split_green)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/Split_green_{i}.jpg", Split_green)
+
+    ##  SUBPLOT FOR RED CHANNEL
+    plt.subplot(224)
+    plt.imshow(Split_red,cmap='gray')
+    plt.title("red color channel")
+    #cv2.imwrite("Split_red.jpg", Split_red)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{i}.jpg", Split_red)
+
+    plt.show()
+
+    cv2.waitKey(1000)
+
         
+    
+
+    ### --------------------------
+'''
+
+all_images = []
+files = imglist2
+
+for name in files:
+    #print(name)
+    image = cv2.imread(name)
+    cv2.imshow('myFile '+name, image) # you don't need `str()`
+    all_images.append(image)
 
 
+resized_images = []
+
+for image in all_images:
+    new = cv2.resize(image, (200,266))
+    cv2.imshow('imagen', new)
+    resized_images.append(new)
+        
+    ### --------------
+'''
+    
+'''
+files = imglist2
+images = np.empty(len(files))
+
+for i in files:
+        #print(myFile)
+        images= cv2.imread(i)
+        cv2.imshow('myFile',images)
+
+
+        new = []
+        for i in range(30):
+            new = cv2.resize(images,(200,266))
+            cv2.imshow('imagen', new)
+
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+'''
 
 #Split = image.copy()
 

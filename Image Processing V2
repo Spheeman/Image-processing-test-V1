@@ -188,7 +188,7 @@ for i in range(0, len(all_images)):
 
     #plt.figure(figsize=(10, 10))
     #new_image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    Split = image.copy()
+    Split = new_image.copy()
     Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
 
         ## SUBPLOT FOR RGB IMAGE
@@ -219,7 +219,7 @@ for i in range(0, len(all_images)):
 
     plt.show()
 
-    cv2.waitKey(1000)
+    cv2.waitKey(0)
 
         
     

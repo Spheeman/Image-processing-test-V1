@@ -1,8 +1,10 @@
 from itertools import count
 import os, sys, cv2
+from timeit import default_timer as timer
+import time
 import matplotlib.pyplot as plt
 import numpy as np
-import  glob
+import glob
 
 from PIL import Image
 from pathlib import Path
@@ -13,6 +15,7 @@ from collections import Counter
 
     ##  DEFINE PATHS
 ##  adding and 'r' before the path string, so it converts it to a 'raw string'.
+    ###     REPLACE /Users/david/Documents/ with whatever your initial file path may be.
 path_blue = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE"
 path_green = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN"
 path_red = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED"
@@ -30,9 +33,7 @@ path_test = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test image
     #   "C:\Users\david\Documents\GitHub\Image-processing-test-V1\Images_RED"
 
 
-
 #image = cv2.imread(r"C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images\ML Photo-6.jpg")
-
 
 
 #cv2.imshow('image', image)
@@ -162,16 +163,17 @@ print("-----------")
 '''
 
     ## TRACK IMAGES IN ORDER IN A GIVEN FOLDER
-
+start = timer()
 all_images = []
 for imglist2 in glob.iglob(f'{path_test}/*'):
    
     # check if the image ends with png
     if (imglist2.endswith(".png") or imglist2.endswith(".jpg")\
-        or imglist2.endswith(".jpeg")):
-        print(imglist2)
+        or imglist2.endswith(".jpeg") or imglist2.endswith(".webp")):
+        #print(imglist2)
+        #print("----")
         all_images.append(imglist2)
-        print(all_images)
+        #print(all_images)
 
         continue
     continue
@@ -191,6 +193,8 @@ for i in range(0, len(all_images)):
     Split = new_image.copy()
     Split_blue, Split_green, Split_red = Split[:, :, 0], Split[:, :, 1], Split[:, :, 2]
 
+
+    '''
         ## SUBPLOT FOR RGB IMAGE
     plt.subplot(221)
     plt.imshow(image[:, :, :])
@@ -200,29 +204,38 @@ for i in range(0, len(all_images)):
     plt.subplot(222)
     plt.imshow(Split_blue,cmap='gray')
     plt.title("blue color channel")
-    #cv2.imwrite("Split_blue.jpg", Split_blue)
+    cv2.imwrite("Split_blue.jpg", Split_blue)
     cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/Split_blue_{i}.jpg", Split_blue)
 
     ##  SUBPLOT FOR GREEN CHANNEL
     plt.subplot(223)
     plt.imshow(Split_green,cmap='gray')
     plt.title("green color channel")
-    #cv2.imwrite("Split_green.jpg", Split_green)
+    cv2.imwrite("Split_green.jpg", Split_green)
     cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/Split_green_{i}.jpg", Split_green)
 
     ##  SUBPLOT FOR RED CHANNEL
     plt.subplot(224)
     plt.imshow(Split_red,cmap='gray')
     plt.title("red color channel")
-    #cv2.imwrite("Split_red.jpg", Split_red)
+    cv2.imwrite("Split_red.jpg", Split_red)
     cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{i}.jpg", Split_red)
+    '''
 
-    plt.show()
-
-    cv2.waitKey(0)
-
-        
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/Split_blue_{i}.bmp", Split_blue)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/Split_green_{i}.bmp", Split_green)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{i}.bmp", Split_red)
+    #'''
+    #plt.show()
+    #time.sleep(1)
+    #cv2.waitKey(1000)
+    #cv2.destroyAllWindows()
     
+    
+    continue
+end = timer()
+time = print(end-start)
+
 
     ### --------------------------
 '''
@@ -266,6 +279,7 @@ for i in files:
         cv2.destroyAllWindows()
 '''
 
+'''
 #Split = image.copy()
 
     ##  IF NO SET PARAMETERS
@@ -313,6 +327,7 @@ for i in files:
 #plt.imshow(Split_red,cmap='gray')
 #plt.title("red color channel")
 #cv2.imwrite("Split_red.jpg", Split_red)
+'''
 
 #plt.show()
 

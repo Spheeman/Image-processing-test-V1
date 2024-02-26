@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import glob
 
+import math
 from PIL import Image
 from pathlib import Path
 from os import listdir
@@ -16,11 +17,29 @@ from collections import Counter
     ##  DEFINE PATHS
 ##  adding and 'r' before the path string, so it converts it to a 'raw string'.
     ###     REPLACE /Users/david/Documents/ with whatever your initial file path may be.
-path_blue = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE"
-path_green = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN"
-path_red = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED"
+#path_blue = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE"
+#path_green = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN"
+#path_red = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED"
 
-path_test = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test images"
+path_blue = glob.glob("C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/*")
+path_green = glob.glob("C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/*")
+path_red = glob.glob("C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/*")
+
+for b in path_blue:
+    os.remove(b)
+
+for g in path_green:
+    os.remove(g)
+
+for r in path_red:
+    os.remove(r)
+
+#path_blue.truncate(0)
+#path_green.truncate(0)
+#path_red.truncate(0)
+#path_test = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test images"
+path_test = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test_dump"
+
 #image = Path("C:\Users\david\Documents\GitHub\Image-processing-test-V1\test images").glob("*.jpg")
 
 
@@ -180,9 +199,9 @@ for imglist2 in glob.iglob(f'{path_test}/*'):
 
 
 plt.figure(figsize=(10, 10))
-
-for i in range(0, len(all_images)):
-
+count = 0
+for i in range(0, len(all_images)): 
+    count = 1 + i
     new_image = cv2.imread(all_images[i])
     #cv2.imshow(f'image{i}', new_image)
 
@@ -222,9 +241,9 @@ for i in range(0, len(all_images)):
     cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{i}.jpg", Split_red)
     '''
 
-    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/Split_blue_{i}.bmp", Split_blue)
-    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/Split_green_{i}.bmp", Split_green)
-    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{i}.bmp", Split_red)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_BLUE/Split_blue_{count}.bmp", Split_blue)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_GREEN/Split_green_{count}.bmp", Split_green)
+    cv2.imwrite(f"C:/Users/david/Documents/GitHub/Image-processing-test-V1/Images_RED/Split_red_{count}.bmp", Split_red)
     #'''
     #plt.show()
     #time.sleep(1)

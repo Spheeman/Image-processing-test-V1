@@ -1,0 +1,60 @@
+import numpy as np
+import cv2
+import math
+from timeit import default_timer as timer
+import time
+
+cap = cv2.VideoCapture(0)
+
+capture_duration = 1
+
+count = 0
+imagesFolder = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test_dump"
+
+start_time = time.time()
+
+while( int(time.time() - start_time) < capture_duration ):
+    while True:
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+
+        # Our operations on the frame come here
+        feed = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
+        count = count+1
+        cv2.imwrite("C:/Users/david/Documents/GitHub/Image-processing-test-V1/test_dump/frame_%05d.jpg" % count, frame)   # save frame as JPEG file
+        
+        # Display the resulting frame
+        cv2.imshow('frame', feed)
+            ## time between every frame in milliseconds 
+        if cv2.waitKey(100) != -1:
+            break
+        break
+
+
+
+'''
+frameRate = cap.get(5) #frame rate
+while(cap.isOpened()):
+    frameId = cap.get(1) #current frame number
+    ret, frame = cap.read()
+    if (ret != True):
+        break
+    if (frameId % math.floor(frameRate) == 0):
+
+
+
+    videoFile = "capture.avi"
+imagesFolder = "C:/Users/david/Documents/GitHub/Image-processing-test-V1/test_dump"
+cap = cv2.VideoCapture(videoFile)
+frameRate = cap.get(5) #frame rate
+while(cap.isOpened()):
+    frameId = cap.get(1) #current frame number
+    ret, frame = cap.read()
+    if (ret != True):
+        break
+    if (frameId % math.floor(frameRate) == 0):
+        filename = imagesFolder + "/image_" +  str(int(frameId)) + ".jpg"
+        cv2.imwrite(filename, frame)
+cap.release()
+print("Done!")
+'''
